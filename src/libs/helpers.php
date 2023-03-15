@@ -1,5 +1,8 @@
 <!-- View function loads the code from a php file and passes data to it -->
 <?php
+    include_once("../../config/config.php");
+?>
+<?php
 function view(string $filename, array $data = []): void
 {
 
@@ -9,7 +12,7 @@ function view(string $filename, array $data = []): void
         
     }
 
-    require_once__DIR__ . '/../inc/' . $filename . '.php';
+    require_once(__DIR__ . "/../src/inc/" . $filename . '.php');
 }
 
 function is_post_request(): bool
@@ -26,4 +29,12 @@ function new_line()
 {
     echo "<br>";
 }
+
+
+// Sanitize Function
+function sanitize(array $inputs, array $fields) : array
+{
+    
+}
+
 ?>

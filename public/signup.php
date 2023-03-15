@@ -3,7 +3,6 @@ include_once("../src/inc/signupHeader.php");
 include_once("../src/libs/helpers.php");
 ?>
 
-
     <form action = "signup.php" method="post">
         
         <div class="container">
