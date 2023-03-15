@@ -1,9 +1,6 @@
-
-    <div class="footer">
-                    <div class="row">
-                    <p>Already a member? <a href="login.php">Login here</a></p>  
-                    </div>
+    <footer class="text-center">
+        <p>Already a member? <a href="login.php">Login here</a></p>  
                 
-    </div>
+    </footer>
 </body>
 </html>
