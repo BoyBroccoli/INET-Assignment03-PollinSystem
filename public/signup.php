@@ -1,5 +1,5 @@
 <?php
-include_once("../src/inc/header.php");
+include_once("../src/inc/signupHeader.php");
 include_once("../src/libs/helpers.php");
 ?>
 
@@ -33,7 +33,7 @@ include_once("../src/libs/helpers.php");
             <div class="row mb-3">
                 <div class="col-6">
                     <label for="password" class="form-label">Password:</label>
-                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
                 </div>
                 <div class="col">
                     <label for="password2" class="form-label">Password Again:</label>
@@ -54,4 +54,4 @@ include_once("../src/libs/helpers.php");
                
     </form>
 
-<?php include_once("../src/inc/footer.php") ?>
+<?php include_once("../src/inc/signupFooter.php") ?>
