@@ -1,8 +1,5 @@
 <!-- View function loads the code from a php file and passes data to it -->
 <?php
-    include_once("../../config/config.php");
-?>
-<?php
 function view(string $filename, array $data = []): void
 {
 
@@ -30,11 +27,14 @@ function new_line()
     echo "<br>";
 }
 
-
-// Sanitize Function
-function sanitize(array $inputs, array $fields) : array
+// Clean up any data
+function clean_data($data)
 {
-    
+    // Trim Whitespace
+    $data = trim($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
+
 
 ?>

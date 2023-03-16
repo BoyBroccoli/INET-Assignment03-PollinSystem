@@ -3,7 +3,7 @@ include_once("../src/inc/signupHeader.php");
 include_once("../src/libs/helpers.php");
 ?>
 
-    <form action = "signup.php" method="post">
+    <form action = "../src/inc/signup-process.php" method="post">
         
         <div class="container">
             <h1 class="text-center">Sign Up Form</h1>
@@ -42,12 +42,12 @@ include_once("../src/libs/helpers.php");
             </div>
             <div class="row text-center mb-3">
                 <label for="agree">
-                    <input type="checkbox" name="agree" id="agree" value="yes"/> I agree with the
+                    <input type="checkbox" name="terms" id="terms"/> I agree with the
                     <a href="#" title="term of services">term of services</a>
                 </label>
             </div>
             <div class="mb-3 text-center">
-                <button class ="btn btn-primary" type="submit">Sign Up</button>
+                <button class ="btn btn-primary" name="submit_btn" type="submit" value="Submit">Sign Up</button>
             </div>
         </div>
                

@@ -14,10 +14,10 @@
 
         try {
             // Creating Connection
-            $conn = new mysqli($serverName,$username,$password,$dbname);
+            $conn = new mysqli($serverName, $username, $password, $dbname);
 
             // Checking Connection
-            if ($conn->connect_error){
+            if ($conn->connect_error) {
                 die("Connection Failed: " .$conn->connect_error);
             } else {
                 echo "Connection Success";
