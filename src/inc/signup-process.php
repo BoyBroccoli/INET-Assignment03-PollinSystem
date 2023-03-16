@@ -5,9 +5,26 @@ include_once("../libs/helpers.php");
 
 $conn = CONNECT_MYSQL();
 
+$terms = filter_input(INPUT_POST, "terms", FILTER_VALIDATE_BOOL);
+
+
+if ( ! $terms) {
+    die("Terms must be accepted");
+}
+
+if (isset($_POST['userName'])) {
+
+    if (empty($_POST['userName'])) {
+        echo "Error setting username.";
+        $userName = null;
+    } else {
+        $userName = $_POST['userName'];
+    }
+}
+
 if (isset($_POST['email'])) {
     if (empty($_POST['email'])) {
-       // $email = null;
+       $email = null;
         echo "Error setting email.";
     } else {
         $email = $_POST['email'];
@@ -16,7 +33,7 @@ if (isset($_POST['email'])) {
 
 if (isset($_POST['fName'])) {
     if (empty($_POST['fName'])) {
-        //$fName = null;
+        $fName = null;
         echo "Error setting First Name.";
     } else {
         $fName = $_POST['fName'];
@@ -25,7 +42,7 @@ if (isset($_POST['fName'])) {
 
 if (isset($_POST['lName'])) {
     if (empty($_POST['lName'])) {
-       // $lName = null;
+       $lName = null;
         echo "Error setting Last Name.";
     } else {
         $lName = $_POST['lName'];
@@ -35,60 +52,45 @@ if (isset($_POST['lName'])) {
 if (isset($_POST['password'])) {
     if (empty($_POST['password'])) {
         echo "Error with password";
+        $password = null;
     } else {
         $password = $_POST['password'];
     }
 }
 
-
 if (isset($_POST['password2'])) {
     if (empty($_POST['password2'])) {
         echo "Error with password2";
+        $password2 = null;
     } else {
         $password2 = $_POST['password2'];
     }
 }
 
-$terms = filter_input(INPUT_POST, "terms", FILTER_VALIDATE_BOOL);
 
-if ( ! $terms) {
-    die("Terms must be accepted");
+$sql = "INSERT INTO user (fName, lName, userName, email, password)
+        VALUES (?, ?, ?, ?, ?)";
+
+// Creating a statement object
+$stmt = mysqli_stmt_init($conn);
+
+// returns a boolean success value
+if (! mysqli_stmt_prepare($stmt, $sql)) { // if false
+
+    die(mysqli_error($conn));
 }
 
-/*
-if (isset($_POST['userName']) && $userName !== "") {
-    clean_data($userName);
-    $userName = mysqli_real_escape_string($conn, $_POST['userName']);
+// binding. connect values to placeholders in sql string
+mysqli_stmt_bind_param($stmt, "sssss", // stmt first, then value types, then values
+                        $fName,
+                        $lName,
+                        $userName,
+                        $email,
+                        $password);
 
-} else {
-    echo "Error: Username is not set.";
-}
+// executing statement
+mysqli_stmt_execute($stmt);
 
-
-$password = mysqli_real_escape_string($conn, $_POST['password']);
-$password2 = mysqli_real_escape_string($conn, $_POST['password2']);
-$fName = mysqli_real_escape_string($conn, $_POST['fName']);
-$lName = mysqli_real_escape_string($conn, $_POST['lName']);
-$email = mysqli_real_escape_string($conn, $_POST['email']);
-
-$values = array($userName, $password, $password2, $fName, $lName, $email);
-
-foreach ($values as $postVal) {
-    echo $postVal;
-    new_line();
-
-}
-    // print_r($_POST);
-
-
-*/
-
-$values = array($userName, $password, $password2, $fName, $lName, $email);
-
-foreach ($values as $postVal) {
-    echo $postVal;
-    new_line();
-
-}
+echo "Record has been inserted into user database";
 
 ?>
