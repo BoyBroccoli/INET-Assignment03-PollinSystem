@@ -56,21 +56,22 @@ if ($_POST["password"] !== $_POST["password2"]) {
     die("Passowrds must match!");
 }
 
-print_r($_POST);
+ // print_r($_POST);
 
-var_dump($password_hash);
+// inserting data into database
 
-/*
-$sql = "INSERT INTO user (fName, lName, userName, email, password)
-        VALUES (?, ?, ?, ?, ?)";
+
+$sql = "INSERT INTO user (fName, lName, userName, email, password_hash)
+        VALUES (?, ?, ?, ?, ?)"; 
+
 
 // Creating a statement object
-$stmt = mysqli_stmt_init($conn);
+$stmt =  mysqli_stmt_init($conn);
 
 // returns a boolean success value
 if (! mysqli_stmt_prepare($stmt, $sql)) { // if false
 
-    die(mysqli_error($conn));
+    die("SQL Error: " . $conn->mysqli_error());
 }
 
 // binding. connect values to placeholders in sql string
@@ -79,11 +80,28 @@ mysqli_stmt_bind_param($stmt, "sssss", // stmt first, then value types, then val
                         $lName,
                         $userName,
                         $email,
-                        $password);
+                        $password_hash);
 
 // executing statement
-mysqli_stmt_execute($stmt);
+if (mysqli_stmt_execute($stmt))  {
 
-echo "Record has been inserted into user database";
-*/
+    echo "Record has been inserted into user database";
+
+    // once entered successful, will redirect to login page
+    header("Location: ../../public/login.php");
+    // exiting the script
+    exit;
+
+} else {
+
+    if (mysqli_errno($conn) === 1062) {
+        die("Error: User Name: '$userName' already exists.");
+    } else {
+        die("SQL Error: " . mysqli_error($conn) . " " . mysqli_errno($conn));
+    }
+    
+}
+
+
+echo SELECT_EVERYTHING_FROM_USER($conn);
 ?>

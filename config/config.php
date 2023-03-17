@@ -20,8 +20,8 @@
             if ($conn->connect_error) {
                 die("Connection Failed: " .$conn->connect_error);
             } else {
-                echo "Connection Success";
-                echo "<br>";
+                // echo "Connection Success";
+                // echo "<br>";
                 return $conn;
             }
 
@@ -45,6 +45,25 @@
             // output data for each row
             while ($row = $result->fetch_assoc()) {
                 echo "id: " . $row["candidateId"] . " Name: " . $row["fName"] . " "  . $row["lName"] . " " . "Slogan: " . $row["slogan"] ."<br>";
+            }
+        } else {
+            echo "0 results";
+        }
+    }
+
+    // function that takes in a mysql obj, returns * from user table
+    function SELECT_EVERYTHING_FROM_USER(&$conn)
+    {
+        $tableName = 'user';
+
+        $sql = "SELECT * FROM " . $tableName;
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // output data for each row
+            while ($row = $result->fetch_assoc()) {
+                echo "id: " . $row["userID"] . " Name: " . $row["fName"] . " "  . $row["lName"] . " " . "userName: " . $row["userName"] . "pwordHash: " . $row["password_hash"]."<br>";
             }
         } else {
             echo "0 results";
