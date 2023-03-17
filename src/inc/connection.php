@@ -14,27 +14,12 @@
     // creating database object and connecting to pollingDB
     $conn = CONNECT_MYSQL();
 
-    // $sql = "SELECT * FROM candidate";
-
-    // $result = $conn->query($sql);
-
-    // if ($result->num_rows > 0) {
-    //     // output data for each row
-    //     while ($row = $result->fetch_assoc()) {
-    //         echo "id: " . $row["candidateId"] . " Name: " . $row["fName"] . " "  . $row["lName"] . "<br>";
-    //     }
-    // } else {
-    //     echo "0 results";
-    // }
-
     // calling function
         echo SELECT_EVERYTHING_FROM_CANDIDATE($conn);
 
     // calling function to insert
         $name = "john";
         $lname = "doe";
-
-        echo INSERT_INTO_CANDIDATE_TABLE($conn);
 
         // retrieving
         echo SELECT_EVERYTHING_FROM_CANDIDATE($conn);

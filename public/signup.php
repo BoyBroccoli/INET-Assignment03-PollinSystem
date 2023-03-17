@@ -10,28 +10,28 @@ include_once("../src/libs/helpers.php");
             <div class="row mb-3">
                 <div class="col-6">
                     <label for="userName" class="form-label">Username:</label>
-                    <input type="text" class="form-control" name="userName" id="userName" placeholder="Input desired username" required>
+                    <input type="text" class="form-control" name="userName" id="userName" placeholder="Input desired username" autocomplete="off" required>
                     <div class="valid-tooltip">
                         Looks Good!
                     </div>
                 </div>
                 <div class="col">
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="email@example.com" required>
+                <input type="email" class="form-control" name="email" id="email" placeholder="email@example.com" autocomplete="off"  required>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-6">
                     <label for="fName" class="form-label">First Name:</label>
-                    <input type="text" class="form-control" name="fName" id="fName" placeholder="Enter First Name" required>
+                    <input type="text" class="form-control" name="fName" id="fName" placeholder="Enter First Name" autocomplete="off"  required>
                     <div class="invalid-tooltip">
                         Please Enter a First Name.
                     </div>
                 </div>
                 <div class="col">
                     <label for="lName" class="form-label">Last Name:</label>
-                    <input type="text" class="form-control" name="lName" id="lName" placeholder="Enter Last Name" required> 
+                    <input type="text" class="form-control" name="lName" id="lName" placeholder="Enter Last Name" autocomplete="off"  required> 
                     <div class="invalid-tooltip">
                         Please Enter a Last Name.
                     </div>
@@ -41,14 +41,14 @@ include_once("../src/libs/helpers.php");
             <div class="row mb-3">
                 <div class="col-6">
                     <label for="password" class="form-label">Password:</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" autocomplete="off"  required>
                     <div class="invalid-tooltip">
                         Please create a password.
                     </div>
                 </div>
                 <div class="col">
                     <label for="password2" class="form-label">Password Again:</label>
-                    <input type="password" class="form-control" name="password2" id="password2" placeholder="Enter exact password again" required>
+                    <input type="password" class="form-control" name="password2" id="password2" placeholder="Enter exact password again" autocomplete="off" required>
                 </div>
                 
             </div>

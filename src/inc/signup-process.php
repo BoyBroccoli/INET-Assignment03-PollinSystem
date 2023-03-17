@@ -3,71 +3,64 @@
 include_once("../../config/config.php");
 include_once("../libs/helpers.php");
 
-$conn = CONNECT_MYSQL();
+$conn = CONNECT_MYSQL(); // Database obj
 
-$terms = filter_input(INPUT_POST, "terms", FILTER_VALIDATE_BOOL);
+// CLIENT SIDE VALIDATION
 
+$terms = filter_input(INPUT_POST, "terms", FILTER_VALIDATE_BOOL); // checking to make sure terms returns true if checked
 
+// if not, sending warning
 if ( ! $terms) {
     die("Terms must be accepted");
 }
 
 if (isset($_POST['userName'])) {
 
-    if (empty($_POST['userName'])) {
-        echo "Error setting username.";
-        $userName = null;
-    } else {
-        $userName = $_POST['userName'];
-    }
+    $userName = $_POST['userName'];
 }
 
 if (isset($_POST['email'])) {
-    if (empty($_POST['email'])) {
-       $email = null;
-        echo "Error setting email.";
-    } else {
-        $email = $_POST['email'];
-    }
+    
+    $email = $_POST['email'];
 }
 
 if (isset($_POST['fName'])) {
-    if (empty($_POST['fName'])) {
-        $fName = null;
-        echo "Error setting First Name.";
-    } else {
-        $fName = $_POST['fName'];
-    }
+
+    $fName = $_POST['fName'];
 }
 
 if (isset($_POST['lName'])) {
-    if (empty($_POST['lName'])) {
-       $lName = null;
-        echo "Error setting Last Name.";
-    } else {
-        $lName = $_POST['lName'];
-    }
+
+    $lName = $_POST['lName'];
 }
 
+
+if (strlen($_POST["password"]) < 5) {
+    die("Password must be at least 5 characters.");
+}
+
+
 if (isset($_POST['password'])) {
-    if (empty($_POST['password'])) {
-        echo "Error with password";
-        $password = null;
-    } else {
-        $password = $_POST['password'];
-    }
+    
+    $password = $_POST['password'];
+    $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 }
 
 if (isset($_POST['password2'])) {
-    if (empty($_POST['password2'])) {
-        echo "Error with password2";
-        $password2 = null;
-    } else {
-        $password2 = $_POST['password2'];
-    }
+
+    $password2 = $_POST['password2'];
 }
 
+if ($_POST["password"] !== $_POST["password2"]) {
 
+    die("Passowrds must match!");
+}
+
+print_r($_POST);
+
+var_dump($password_hash);
+
+/*
 $sql = "INSERT INTO user (fName, lName, userName, email, password)
         VALUES (?, ?, ?, ?, ?)";
 
@@ -92,5 +85,5 @@ mysqli_stmt_bind_param($stmt, "sssss", // stmt first, then value types, then val
 mysqli_stmt_execute($stmt);
 
 echo "Record has been inserted into user database";
-
+*/
 ?>
