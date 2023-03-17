@@ -1,4 +1,17 @@
+input[type="email"] {
+    appearance: none;
+}
+
 input:invalid {
     border-color: #900;
     background-color: #fdd;
+}
+
+.error {
+    background-color: #900;
+    box-sizing: border-box;
+}
+
+.error.active {
+    padding: 0.3em;
 }
