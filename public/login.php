@@ -81,7 +81,10 @@
     </div> 
 </div>
 
-<?php
-    include_once("../src/inc/loginFooter.php");
-?>
+<footer class="text-center">
+    <p>&copy; 2023 Boy Broccoli Productions</p>        
+</footer>
+
+</body>
+</html>
 

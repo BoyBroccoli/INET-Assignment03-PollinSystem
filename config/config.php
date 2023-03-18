@@ -1,7 +1,5 @@
-<!-- This file will store the database obj method -->
-
-
 <?php
+// This file will store the database obj method
 
 // FUNCTION TO CREATE MYSQLI DATABASE OBJ
     function CONNECT_MYSQL()

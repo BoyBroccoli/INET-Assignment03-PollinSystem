@@ -1,4 +1,5 @@
 <?php
+    include_once("../config/config.php");
     // will either start a new session or resume and existing one. sent here after login successful
     session_start();
 
