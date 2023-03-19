@@ -7,9 +7,10 @@
                     WHERE userName = '%s'",
                     $conn->real_escape_string($_GET["userName"]));
     
+    // running the qquery
     $result = $conn->query($sql);
 
-    // checking num of rows given. if 0 then username doesnt exist
+    // checking num of rows given. if 0 then username doesnt exist returns boolean
     $is_available = $result->num_rows === 0;
 
     // will output in json

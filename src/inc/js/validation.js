@@ -7,22 +7,21 @@ validation
         {
             rule: "required"
         },
-        {
-            validator: (value) => () => {
-                return fetch("INET-Assignment03-PollinSystem/src/inc/validate-userName.php?userName=" + 
-                encodeURIComponent(value)) //returns a promise obj
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.available) {
-                                return Promise.resolve(true);
-                            } else {
-                                return Promise.reject("User Name Already Exists");
-                            }
-                        })
-                        .catch(error => Promise.reject("Unable to check User Name availability"));
-            },
-            errorMessage: "User Name Already Exists"
-        }
+        // {
+        //     // custom validator
+        //     validator: (value) => () => {
+        //         // makeing a request to the php username-validte script
+        //         return fetch("../validate-userName.php?userName=" 
+        //         + encodeURIComponent(value)) // returns a promise obj
+        //                 .then(function(Response) { // calling then function to pass the json resonse
+        //                     return Response.json(); // return js obj
+        //                 }) // returns a promise obj
+        //                 .then(function(json) {
+        //                     return json.available;
+        //                 });
+        //     },
+        //     errorMessage: "User Name Already Taken"
+        // }
     ])
     .addField("#email", [ // rule for email
         {

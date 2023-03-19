@@ -17,14 +17,6 @@
     // calling function
         echo SELECT_EVERYTHING_FROM_CANDIDATE($conn);
 
-    // calling function to insert
-        $name = "john";
-        $lname = "doe";
-
-        // retrieving
-        echo SELECT_EVERYTHING_FROM_CANDIDATE($conn);
-
-
     // closing connection
     $conn->close();
 ?>

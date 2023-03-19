@@ -38,11 +38,6 @@ if (isset($_POST['lName'])) {
     $lName = $_POST['lName'];
 }
 
-// Checking Password length Varification
-if (strlen($_POST["password"]) < 5) {
-    die("Password must be at least 5 characters.");
-}
-
 // Checking Password is set Varification
 if (isset($_POST['password'])) {
     
@@ -74,7 +69,7 @@ $stmt =  mysqli_stmt_init($conn);
 // returns a boolean success value
 if (! mysqli_stmt_prepare($stmt, $sql)) { // if false
 
-    die("SQL Error: " . $conn->mysqli_error());
+    die("SQL Error: " . mysqli_error($conn));
 }
 
 // binding. connect values to placeholders in sql string
@@ -86,7 +81,7 @@ mysqli_stmt_bind_param($stmt, "sssss", // stmt first, then value types, then val
                         $password_hash);
 
 // executing statement
-if (mysqli_stmt_execute($stmt))  {
+if (mysqli_stmt_execute($stmt)) {
 
     echo "Record has been inserted into user database";
 
