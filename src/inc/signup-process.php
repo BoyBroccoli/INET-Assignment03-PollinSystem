@@ -9,60 +9,63 @@ $conn = CONNECT_MYSQL(); // Database obj
 
 $terms = filter_input(INPUT_POST, "terms", FILTER_VALIDATE_BOOL); // checking to make sure terms returns true if checked
 
-// if not, sending warning
-if ( ! $terms) {
+// terms varification
+if (! $terms) {
     die("Terms must be accepted");
 }
 
+// userName varification
 if (isset($_POST['userName'])) {
 
     $userName = $_POST['userName'];
 }
 
+// Email Verification
 if (isset($_POST['email'])) {
     
     $email = $_POST['email'];
 }
 
+// First Name Varification
 if (isset($_POST['fName'])) {
 
     $fName = $_POST['fName'];
 }
 
+// Last Name Varification
 if (isset($_POST['lName'])) {
 
     $lName = $_POST['lName'];
 }
 
-
+// Checking Password length Varification
 if (strlen($_POST["password"]) < 5) {
     die("Password must be at least 5 characters.");
 }
 
-
+// Checking Password is set Varification
 if (isset($_POST['password'])) {
     
     $password = $_POST['password'];
+    // Storing Password in a hash
     $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 }
 
+// Checking Password2 Varification
 if (isset($_POST['password2'])) {
 
     $password2 = $_POST['password2'];
 }
 
+// Checking if passwords don't match
 if ($_POST["password"] !== $_POST["password2"]) {
 
     die("Passowrds must match!");
 }
 
- // print_r($_POST);
-
 // inserting data into database
-
-
 $sql = "INSERT INTO user (fName, lName, userName, email, password_hash)
-        VALUES (?, ?, ?, ?, ?)"; 
+        VALUES (?, ?, ?, ?, ?)";
 
 
 // Creating a statement object
@@ -102,6 +105,4 @@ if (mysqli_stmt_execute($stmt))  {
     
 }
 
-
-echo SELECT_EVERYTHING_FROM_USER($conn);
 ?>

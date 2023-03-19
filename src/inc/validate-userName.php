@@ -3,7 +3,7 @@
     $conn = CONNECT_MYSQL();
 
     // selecting everything from user where the userName equals the one given
-    $sql = sprintf("SELECT * FROM user 
+    $sql = sprintf("SELECT * FROM user
                     WHERE userName = '%s'",
                     $conn->real_escape_string($_GET["userName"]));
     

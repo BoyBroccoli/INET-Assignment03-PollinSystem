@@ -1,6 +1,8 @@
-const validation = new JustValidate("#signupform"); // just validate obj with selector for form
+// JustValidate obj with selector for form
+const validation = new JustValidate("#signupform");
 
-validation // obj, field select first argument and then an array fof rules. each rule an obj
+// obj, field select first argument and then an array for rules. each rule an obj
+validation
     .addField("#userName", [ // rule for userName
         {
             rule: "required"
@@ -12,7 +14,7 @@ validation // obj, field select first argument and then an array fof rules. each
                         .then(response => response.json())
                         .then(data => {
                             if (data.available) {
-                                return Promise.resolve(false);
+                                return Promise.resolve(true);
                             } else {
                                 return Promise.reject("User Name Already Exists");
                             }

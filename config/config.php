@@ -18,8 +18,7 @@
             if ($conn->connect_error) {
                 die("Connection Failed: " .$conn->connect_error);
             } else {
-                // echo "Connection Success";
-                // echo "<br>";
+
                 return $conn;
             }
 
@@ -42,7 +41,8 @@
         if ($result->num_rows > 0) {
             // output data for each row
             while ($row = $result->fetch_assoc()) {
-                echo "id: " . $row["candidateId"] . " Name: " . $row["fName"] . " "  . $row["lName"] . " " . "Slogan: " . $row["slogan"] ."<br>";
+                echo "id: " . $row["candidateId"] . " Name: " . $row["fName"] . " "
+                . $row["lName"] . " " . "Slogan: " . $row["slogan"] ."<br>";
             }
         } else {
             echo "0 results";
@@ -61,28 +61,11 @@
         if ($result->num_rows > 0) {
             // output data for each row
             while ($row = $result->fetch_assoc()) {
-                echo "id: " . $row["userID"] . " Name: " . $row["fName"] . " "  . $row["lName"] . " " . "userName: " . $row["userName"] . "pwordHash: " . $row["password_hash"]."<br>";
+                echo "id: " . $row["userID"] . " Name: " . $row["fName"] . " "
+                . $row["lName"] . " " . "userName: " . $row["userName"] . "pwordHash: " . $row["password_hash"]."<br>";
             }
         } else {
             echo "0 results";
-        }
-    }
-
-
-// Wont accept string variables. Syntax error
-    function INSERT_INTO_CANDIDATE_TABLE(&$conn)
-    {
-        $tableName = 'candidate';
-        $fName = "john";
-        $lName = "doe";
-
-        $sql = "INSERT INTO candidate (fName, lName) VALUES ('john','doe')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
-          
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
         }
     }
 
