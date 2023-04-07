@@ -8,7 +8,7 @@
     $is_invalid = false;
 
     // when page first starts the mothod is 'get' once submit btn click it changes to 'post'
-    if ($_SERVER["REQUEST_METHOD"] === "POST"){
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
         // connect to db and check if username and pwrd given match records in db
         $conn = CONNECT_MYSQL();
