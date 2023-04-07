@@ -12,9 +12,8 @@
         
         // connect to db and check if username and pwrd given match records in db
         $conn = CONNECT_MYSQL();
-
-        $sql = sprintf("SELECT * FROM user WHERE userName = '%s'",
-                        $conn->real_escape_string($_POST["userName"]));
+        $userName = $conn->real_escape_string($_POST["userName"]);
+        $sql = "SELECT * FROM user WHERE userName = '$userName'";
 
         $result = $conn->query($sql);
 
@@ -34,16 +33,14 @@
                 $_SESSION["user_id"] = $user["userID"];
 
                 // redirect to index page and end script
-                if ($user["isAdmin"] == false){
+                if ($user["isAdmin"] == false) {
                     header("Location: ./votepage.php");
                     exit;
                 } else {
                     header("Location: ./pollingofficer.php");
                     exit;
                 }
-                
-            
-            } 
+            }
         }
 
         $is_invalid = true;
@@ -63,18 +60,19 @@
                     <h1 class="card-title">Login</h1>
                     <div class="row mb-3">
                         <label for="userName" class="form-label">Username:</label>
-                        <input type="text" class="form-control" name="userName" id="userName" placeholder="Input username" autocomplete="off" required>
+                        <input type="text" class="form-control" name="userName" id="userName"
+                        placeholder="Input username" autocomplete="off" required>
                     </div>
 
                     <div class="row mb-3">
                         <label for="password" class="form-label">Password:</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" autocomplete="off" required>
+                        <input type="password" class="form-control" name="password" id="password"
+                        placeholder="Enter password" autocomplete="off" required>
                     </div>
 
                     <div class="mb-3 text-center">
                         <button class ="btn btn-primary" type="submit">Login</button>
                         <a href="./signup.php">Sign Up</a>
-                    </div>
                 </div>
             </form>
         </div>
@@ -82,7 +80,7 @@
 </div>
 
 <footer class="text-center">
-    <p>&copy; 2023 Boy Broccoli Productions</p>        
+    <p>&copy; 2023 Boy Broccoli Productions</p>
 </footer>
 
 </body>

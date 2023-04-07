@@ -9,8 +9,9 @@
     if (isset($_SESSION["user_id"])) {
 
         $conn = CONNECT_MYSQL();
+        $userID = $_SESSION["user_id"];
 
-        $sql = "SELECT * FROM user WHERE userID = {$_SESSION["user_id"]}";
+        $sql = "SELECT * FROM user WHERE userID = '$userID'";
 
         // storing in result obj
         $result = $conn->query($sql);

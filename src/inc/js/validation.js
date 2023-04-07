@@ -6,22 +6,19 @@ validation
     .addField("#userName", [ // rule for userName
         {
             rule: "required"
-        },
-        {
-            // custom validator
-            validator: (value) => () => {
-                // makeing a request to the php username-validte script
-                return fetch("../validate-userName.php?userName=" 
-                + encodeURIComponent(value)) // returns a promise obj
-                        .then(function(Response) { // calling then function to pass the json resonse
-                            return Response.json(); // return js obj
-                        }) // returns a promise obj
-                        .then(function(json) {
-                            return json.available;
-                        });
-            },
-            errorMessage: "User Name Already Taken"
-        }
+        }//,
+        // {
+        //     // custom validator
+        //     validator: (value) => async () => {
+        //         // makeing a request to the php username-validte script
+        //         let Response = await fetch("../../../models/validate-userName.php"
+        //             + encodeURIComponent(value)) // returns a promise obj
+        //             ;
+        //         let json = await Response.json();
+        //         return json.available;
+           // },
+            //errorMessage: "User Name Already Taken"
+        //}
     ])
     .addField("#email", [ // rule for email
         {

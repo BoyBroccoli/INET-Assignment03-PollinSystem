@@ -5,7 +5,7 @@
 
 ?>
 
-    <form action = "../src/inc/signup-process.php" method="post" id="signupform" novalidate>
+    <form action = "../models/signup-process.php" method="post" id="signupform" novalidate>
         
         <div class="container">
             <h1 class="text-center">Sign Up Form</h1>

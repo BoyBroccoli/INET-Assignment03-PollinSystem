@@ -1,11 +1,12 @@
 <?php
-    include_once("../../config/config.php");
+    include_once("../config/config.php");
+
     $conn = CONNECT_MYSQL();
 
     // selecting everything from user where the userName equals the one given
-    $sql = sprintf("SELECT * FROM user
-                    WHERE userName = '%s'",
-                    $conn->real_escape_string($_GET["userName"]));
+    //$userName = mysqli_real_escape_string($conn, $_POST["username"]);
+
+    $sql = "SELECT * FROM user WHERE userName = '" . $_REQUEST["userName"] . "'";
     
     // running the qquery
     $result = $conn->query($sql);

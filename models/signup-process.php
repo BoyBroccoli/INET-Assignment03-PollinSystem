@@ -1,6 +1,6 @@
 <?php
 
-include_once("../../config/config.php");
+include_once("../config/config.php");
 include_once("../libs/helpers.php");
 
 $conn = CONNECT_MYSQL(); // Database obj
@@ -17,31 +17,31 @@ if (! $terms) {
 // userName varification
 if (isset($_POST['userName'])) {
 
-    $userName = $_POST['userName'];
+    $userName = mysqli_escape_string($conn, $_POST['userName']);
 }
 
 // Email Verification
 if (isset($_POST['email'])) {
     
-    $email = $_POST['email'];
+    $email = mysqli_escape_string($conn, $_POST['email']);
 }
 
 // First Name Varification
 if (isset($_POST['fName'])) {
 
-    $fName = $_POST['fName'];
+    $fName = mysqli_escape_string($conn, $_POST['fName']);
 }
 
 // Last Name Varification
 if (isset($_POST['lName'])) {
 
-    $lName = $_POST['lName'];
+    $lName = mysqli_escape_string($conn, $_POST['lName']);
 }
 
 // Checking Password is set Varification
 if (isset($_POST['password'])) {
     
-    $password = $_POST['password'];
+    $password = mysqli_escape_string($conn, $_POST['password']);
     // Storing Password in a hash
     $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 }
@@ -49,7 +49,7 @@ if (isset($_POST['password'])) {
 // Checking Password2 Varification
 if (isset($_POST['password2'])) {
 
-    $password2 = $_POST['password2'];
+    $password2 = mysqli_escape_string($conn, $_POST['password2']);
 }
 
 // Checking if passwords don't match
@@ -86,7 +86,7 @@ if (mysqli_stmt_execute($stmt)) {
     echo "Record has been inserted into user database";
 
     // once entered successful, will redirect to login page
-    header("Location: ../../public/login.php");
+    header("Location: ../views/login.php");
     // exiting the script
     exit;
 
