@@ -1,4 +1,4 @@
-<!DOCTYPE html/>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset='utf-8'>
@@ -8,7 +8,9 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../src/inc/css/style.css">
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
-    <script src="../src/inc/js/validation.js" defer></script>
-    <title>Signup Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../inc/js/validation.js" defer></script>
+    <script src="../inc/js/myScript.js"></script>
+    <title><?php echo $title?></title>
 </head>
 <body>

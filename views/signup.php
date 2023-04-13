@@ -1,6 +1,6 @@
 <?php
-
-    include_once("../src/inc/signupHeader.php");
+    $title = "Signup Form | Signup Today";
+    include_once("../src/inc/headerTemplate.php");
     include_once("../src/libs/helpers.php");
 
 ?>

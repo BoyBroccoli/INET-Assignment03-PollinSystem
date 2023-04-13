@@ -1,6 +1,9 @@
-<?php 
-    include_once("../src/inc/loginHeader.php");
+<?php
+
+    $title = "Login | Vote Today";
+    include_once("../src/inc/headerTemplate.php");
     include_once("../config/config.php");
+
 ?>
 
 <!-- PROCESSING FORM HERE -->
@@ -34,9 +37,17 @@
 
                 // redirect to index page and end script
                 if ($user["isAdmin"] == false) {
-                    header("Location: ./votepage.php");
-                    exit;
+                    if ($user["hasVoted"] == true) {
+
+                        header("Location: ./hasVotedPage.php");
+                        exit;
+                    } else {
+
+                        header("Location: ./votepage.php");
+                        exit;
+                    }
                 } else {
+
                     header("Location: ./pollingofficer.php");
                     exit;
                 }
@@ -76,7 +87,7 @@
                 </div>
             </form>
         </div>
-    </div> 
+    </div>
 </div>
 
 <footer class="text-center">

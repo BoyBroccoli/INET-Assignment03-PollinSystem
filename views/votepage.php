@@ -1,4 +1,8 @@
-<?php include_once("../config/config.php"); ?>
+<?php
+    $title = "Home | Vote for a Candidate";
+    include_once("../config/config.php");
+    include_once("../src/inc/headerTemplate.php");
+?>
 
 <?php
     // will either start a new session or resume and existing one. sent here after login successful
@@ -19,21 +23,9 @@
         $user = $result->fetch_assoc();
     }
 
-    // can store values in session super global
-   // print_r($_SESSION);
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Home | Vote for Candidate</title>
-</head>
-<body>    
     <?php if (isset($user)) : ?>
 
         <h1>Hello <?= htmlspecialchars($user["fName"]) ?>, Vote Today!</h1>
@@ -45,11 +37,6 @@
                         <div class="card-header">
                             <h3>
                                 Current Candidates!
-                                <!-- button for voting for a candidate -->
-                                <button type="button" id="voteTodayBtn"class="btn btn-primary float-end"
-                                    data-bs-toggle="modal" data-bs-target="#voteForCandidateModal">
-                                    Vote Today!
-                                </button>
                             </h3>
                         </div>
 
@@ -64,6 +51,7 @@
                                             <!-- table column headings -->
                                             <th id="candidateName">Candidate Name</th>
                                             <th id="candidateSlogan">Candidate Slogan</th>
+                                            <th id="candidateButton">Vote</th>
                                         </tr>
                                     </thead>
                                     <!-- table body -->
@@ -74,29 +62,12 @@
                                         ?>
                                     </tbody>
                                 </table>
+
+                                
+
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- container for holding radio buttons -->
-            <div class="container">
-                <h2>Choose Your Candidate</h2>
-                <div class="row">
-                    <form id="candidateForm" action="../models/voteForCandidate.php" >
-                        <!-- radio buttons for candidates -->
-                        <input type="radio" id="candidateChoice1"  name="candidateChoices" value="Boy Broccoli">
-                        <label for="boyBroc">Boy Broccoli</label><br>
-
-                        <input type="radio" id="candidateChoice2"  name="candidateChoices" value="Barrack Obama">
-                        <label for="barackObama">Barrack Obama</label><br>
-
-                        <input type="radio" id="candidateChoice3"  name="candidateChoices" value="Mo Kamalian">
-                        <label for="moKamalian">Mo Kamalian</label><br>
-
-                        <input type="submit" value="Submit">
-                    </form>
                 </div>
             </div>
 
