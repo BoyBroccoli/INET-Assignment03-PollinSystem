@@ -21,65 +21,125 @@
     }
     // can store values in session super global
    // print_r($_SESSION);
+ 
 ?>
 
 
     
     <?php if (isset($user)) : ?>
-
+    
         <h1>Polling Officer, You are Logged in!</h1>
 
         <div class="container">
             <h2>Candidate Operations</h2>
-            <div class="row">
-                <div class="col">
-                    <button type="button" id="showCandidatesBtn"
-                        class="btn btn-outline-primary btn-lg">See All Candidates</button>
+            <form action="" method="post">
+                <div class="row">
+                    <div class="col">
+                        <input type="submit" id="showCandidatesBtn" name="showCandidatesBtn"
+                            value="Show All Candidates" />
+                    </div>
+                    <div class="col">
+                        <input type="submit" id="addCandidateBtn" name="addCandidateBtn"
+                            value="Add New Candidate" />
+                    </div>
                 </div>
-                <div class="col">
-                    <button type="button" id="addCandidateBtn"
-                        class="btn btn-outline-success btn-lg">Add New Candidate</button>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col">
-                    <button type="button" id="updateCandidateBtn"
-                        class="btn btn-outline-warning btn-lg">Update a Candidate</button>
+                <div class="row">
+                    <div class="col">
+                        <input type="submit" id="updateCandidateBtn" name="updateCandidateBtn"
+                            value="Update a Candidate" />
+                    </div>
+                    <div class="col">
+                        <input type="submit" id="deleteCandidateBtn" name="deleteCandidateBtn"
+                            value="Delate a Candidate" />
+                    </div>
                 </div>
-                <div class="col">
-                    <button type="button" id="deleteCandidateBtn"
-                        class="btn btn-outline-danger btn-lg">Delate a Candidate</button>
-                </div>
-            </div>
+            </form>
+            
         </div>
+
 
         <br>
 
         <div class="container">
             <h2>User Operations</h2>
-            <div class="row">
-                <div class="col">
-                    <button type="button" id="showUsersBtn"
-                        class="btn btn-outline-primary btn-lg">See All Users</button>
-                </div>
-                <div class="col">
-                    <button type="button" id="addUserBtn"
-                        class="btn btn-outline-success btn-lg">Add New User</button>
-                </div>
-            </div>
+            
+                <form id="userOperations" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <input type="submit" id="showUsersBtn" name="showUsersBtn"
+                                value="See All Users" />
+                        </div>
+                        <div class="col">
+                            <input type="submit" id="addUserBtn" name="addUserBtn"
+                                value="Add New User" />
+                        </div>
+                    </div>
 
-            <div class="row">
-                <div class="col">
-                    <button type="button" id="updateUserBtn"
-                        class="btn btn-outline-warning btn-lg">Update a User</button>
-                </div>
-                <div class="col">
-                    <button type="button" id="deleteUserBtn"
-                        class="btn btn-outline-danger btn-lg">Delate a User</button>
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="submit" id="updateUserBtn" name="updateUserBtn"
+                                value="Update a User" />
+                        </div>
+                        <div class="col">
+                            <input type="submit" id="deleteUserBtn" name="deleteUserBtn"
+                                value="Delate a User" />
+                        </div>
+                    </div>
+                </form>
+                
         </div>
+
+        <!-- for candidate operations -->
+        <?php
+
+            // functionality for show CandidatesBtn
+            if (isset($_POST['showCandidatesBtn'])) {
+
+                showCandidatesBtn($conn);
+            }
+
+            // functionality for addCandidateBtn
+            if (isset($_POST['addCandidateBtn'])) {
+                addNewCandidateBtnForm();
+            }
+
+            // functionality for updateCandidateBtn
+            if (isset($_POST['updateCandidateBtn'])) {
+
+            }
+
+            // functionality for deleteCandidateBtn
+            if (isset($_POST['deleteCandidateBtn'])) {
+
+            }
+        ?>
+
+        <!-- for user operations -->
+        <?php
+
+                // functionality for showUsersBtn
+                if (isset($_POST['showUsersBtn'])) {
+
+                    showUsersBtn($conn);
+                }
+
+                // functionality for addUserBtn
+                if (isset($_POST['addUserBtn'])) {
+
+                    echo addNewUserBtnForm();
+                }
+
+                // functionality for updateUserBtn
+                if (isset($_POST['updateUserBtn'])) {
+
+                }
+
+                // functionality for deleteUserBtn
+                if (isset($_POST['deleteUserBtn'])) {
+
+                }
+        ?>
 
         <div class="footer">
             <p>
@@ -87,13 +147,8 @@
             </p>
         </div>
 
-
-
-
     <?php else:
         header("Location: ./login.php");
         endif;
         exit;
     ?>
-</body>
-</html>

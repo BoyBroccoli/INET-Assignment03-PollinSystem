@@ -117,4 +117,220 @@
 
     }
 
+    function showCandidatesBtn(&$conn)
+    {
+        $tableName = 'candidate';
+
+        $sql = "SELECT * FROM " . $tableName;
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+
+            ?>
+
+            <table class="table table-bordered table-striped table-hover">
+                <!-- table head -->
+                <thead>
+                    <!-- table row -->
+                    <tr>
+                        <!-- table column headings -->
+                        <th id="candidateName">Candidate Name</th>
+                        <th id="candidateSlogan">Candidate Slogan</th>
+                        
+                    </tr>
+                </thead>
+
+            <?php
+            // for each to show each applicant
+
+            foreach ($result as $candidate)
+            {
+
+                ?>
+                
+                <!-- table body -->
+                <tbody>
+                    <td><?= $candidate['fName'] ." ". $candidate['lName']?></td>
+                    <td><?= $candidate['slogan']?></td>
+                    
+                </tbody>
+ 
+            <?php
+            }
+
+            ?>
+            </table>
+            <?php
+        } else {
+            echo "0 results";
+        }
+
+        $conn->close();
+    }
+
+
+    function showUsersBtn(&$conn)
+    {
+        $tableName = 'user';
+
+        $sql = "SELECT user.fName, user.lName, user.candidateId
+                FROM " . $tableName . ", candidate
+                WHERE user.candidateId = candidate.candidateId";
+
+  
+                $query = "SELECT user.userName, candidate.candidateId, candidate.fName, candidate.lName
+                            FROM user
+                            INNER JOIN candidate on candidate.candidateId = user.candidateId";
+
+        $result = $conn->query($query);
+
+        if ($result->num_rows > 0) {
+
+            ?>
+
+            <table class="table table-bordered table-striped table-hover">
+                <!-- table head -->
+                <thead>
+                    <!-- table row -->
+                    <tr>
+                        <!-- table column headings -->
+                        <th id="userName">User Name</th>
+                        <th id="userVote">User Voted For</th>
+                        
+                    </tr>
+                </thead>
+
+            <?php
+            // for each to show each applicant
+
+            foreach ($result as $user)
+            {
+
+                ?>
+                
+                <!-- table body -->
+                <tbody>
+                    <td><?= $user['userName']?></td>
+                    <td><?= $user['fName'] . " " . $user['lName']?></td>
+                    
+                </tbody>
+ 
+            <?php
+            
+            }
+            
+            ?>
+            </table>
+            <?php
+        } else {
+            echo "0 results";
+        }
+
+        $conn->close();
+    }
+
+    function addNewUserBtnForm()
+    {
+        ?>
+        <form action="../models/pOfficer-AddUser.php" method="post" id="addUser" novalidate>
+            <div class="container">
+                <h1 class="text-center">Add a New User</h1>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <!-- User Name Entry for Form -->
+                        <label for="userName" class="form-label">Username:</label>
+                        <input type="text" class="form-control" name="userName" id="userName"
+                        placeholder="Input desired username" autocomplete="off">
+                    </div>
+                        <!-- Email Entry for Form -->
+                    <div class="col">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" name="email" id="email"
+                    placeholder="email@example.com" autocomplete="off">
+                    </div>
+                </div>
+                        <!-- First Name Entry for Form -->
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="fName" class="form-label">First Name:</label>
+                        <input type="text" class="form-control" name="fName" id="fName"
+                        placeholder="Enter First Name" autocomplete="off">
+                    </div>
+                    <!-- Last Name Entry for Form -->
+                    <div class="col">
+                        <label for="lName" class="form-label">Last Name:</label>
+                        <input type="text" class="form-control" name="lName" id="lName"
+                        placeholder="Enter Last Name" autocomplete="off">
+                    </div>
+                </div>
+                <!-- Password Entry for Form -->
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" class="form-control" name="password" id="password"
+                        placeholder="Enter password" autocomplete="off">
+                    </div>
+                    <!-- Password Confirmation for Form -->
+                    <div class="col">
+                        <label for="password2" class="form-label">Password Again:</label>
+                        <input type="password" class="form-control" name="password2" id="password2"
+                        placeholder="Enter exact password again" autocomplete="off">
+                    </div>
+                </div>
+                <!-- Terms Agreement Button -->
+                <div class="row text-center mb-3">
+                    <label for="agree">
+                        <input type="checkbox" name="terms" id="terms" required/> I agree with the
+                        <a href="#" title="term of services">term of services</a>
+                    </label>
+                </div>
+                <!-- Submit Button -->
+                <div class="mb-3 text-center">
+                    <button class ="btn btn-primary" name="submit_btn" type="submit" value="Submit">Add User</button>
+                </div>
+            </div>
+        </form>
+        <?php
+    }
+
+    function addNewCandidateBtnForm()
+    {
+        ?>
+            <form action="../models/pOfficer-AddCandidate.php" method="post" id="addUser" novalidate>
+            <div class="container">
+                <h1 class="text-center">Add a New Candidate</h1>
+                
+                        <!-- First Name Entry for Form -->
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="fName" class="form-label">First Name:</label>
+                        <input type="text" class="form-control" name="fName" id="fName"
+                        placeholder="Enter First Name" autocomplete="off">
+                    </div>
+                    <!-- Last Name Entry for Form -->
+                    <div class="col">
+                        <label for="lName" class="form-label">Last Name:</label>
+                        <input type="text" class="form-control" name="lName" id="lName"
+                        placeholder="Enter Last Name" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <!-- User Name Entry for Form -->
+                        <label for="slogan" class="form-label">Slogan:</label>
+                        <input type="text" class="form-control" name="slogan" id="slogan"
+                        placeholder="Input Candidates Slogan" autocomplete="off">
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="mb-3 text-center">
+                    <button class ="btn btn-primary" name="submit_btn" type="submit" value="Submit">Add Candidate</button>
+                </div>
+            </div>
+        <?php
+    }
+    
 ?>
