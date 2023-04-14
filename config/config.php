@@ -46,7 +46,7 @@
 
         if ($result->num_rows > 0) {
             // for each to show each applicant
-            foreach ($result as $candidate) 
+            foreach ($result as $candidate)
             {
                 // closing php and echoing inside html table data
                 ?>
@@ -54,15 +54,11 @@
                     <td><?= $candidate['fName'] ." ". $candidate['lName']?></td>
                     <td><?= $candidate['slogan']?></td>
                     <td><!-- radio buttons for candidates storing candidateid-->
-                        <input type="radio" id="candidateChoice"  name="candidateChoice" 
+                        <input type="radio" id="candidateChoice"  name="candidateChoice"
                           value="<?= $candidate['candidateId']?>" required>
-                    </td>
-                    
+                    </td>                    
                 </tr>
-                
-
-                <?php
-                
+                <?php              
             }
 
             ?>
@@ -136,8 +132,7 @@
                     <tr>
                         <!-- table column headings -->
                         <th id="candidateName">Candidate Name</th>
-                        <th id="candidateSlogan">Candidate Slogan</th>
-                        
+                        <th id="candidateSlogan">Candidate Slogan</th>                        
                     </tr>
                 </thead>
 
@@ -153,7 +148,6 @@
                 <tbody>
                     <td><?= $candidate['fName'] ." ". $candidate['lName']?></td>
                     <td><?= $candidate['slogan']?></td>
-                    
                 </tbody>
  
             <?php
@@ -172,18 +166,12 @@
 
     function showUsersBtn(&$conn)
     {
-        $tableName = 'user';
+        
+        $sql = "SELECT user.userName, candidate.candidateId, candidate.fName, candidate.lName
+                    FROM user
+                    INNER JOIN candidate on candidate.candidateId = user.candidateId";
 
-        $sql = "SELECT user.fName, user.lName, user.candidateId
-                FROM " . $tableName . ", candidate
-                WHERE user.candidateId = candidate.candidateId";
-
-  
-                $query = "SELECT user.userName, candidate.candidateId, candidate.fName, candidate.lName
-                            FROM user
-                            INNER JOIN candidate on candidate.candidateId = user.candidateId";
-
-        $result = $conn->query($query);
+        $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
 
@@ -333,4 +321,166 @@
         <?php
     }
     
+
+
+    function updateCandidateBtn(&$conn)
+    {
+        ?>
+            <div class="table-responsive">
+                <table id="tAppUpdateDbTable" class="table table-bordered table-striped table-hover">
+                    <!-- table head -->
+                    <thead>
+                        <!-- table row -->
+                        <tr>
+                            <!-- table column headings -->
+                            <th id="appIdHeading">Candidate ID</th>
+                            <th id="appQHeading">Candidate Full Name</th>
+                            <th id="appOrigAnsHeading">Candidate Slogan</th>
+                                
+                        </tr>
+                    </thead>
+                    <!-- table body -->
+                    <tbody>
+                        
+                    </tbody>
+
+                </table>
+            </div>
+        <?php
+    }
+
+    function deleteCandidateBtnForm(&$conn)
+    {
+        $tableName = 'candidate';
+
+        $sql = "SELECT * FROM " . $tableName;
+
+        $result = $conn->query($sql);
+
+        ?>
+        <form action="../models/pOfficer-DeleteCandidate.php" method="post">
+            <table id="candidateTable" class="table table-bordered table-striped table-hover">
+                <!-- table head -->
+                <thead>
+                    <!-- table row -->
+                    <tr>
+                        <!-- table column headings -->
+                        <th id="candidateName">Candidate Name</th>
+                        <th id="candidateSlogan">Candidate Slogan</th>
+                        <th id="candidateButton">Delete</th>
+                    </tr>
+                </thead>
+        
+        <?php
+
+        if ($result->num_rows > 0) {
+            // for each to show each applicant
+            foreach ($result as $candidate)
+            {
+                // closing php and echoing inside html table data
+                ?>
+                <tr>
+                    <td><?= $candidate['fName'] ." ". $candidate['lName']?></td>
+                    <td><?= $candidate['slogan']?></td>
+                    <td>
+                        <input type="radio" id="candidateChoice"  name="candidateChoice"
+                          value="<?= $candidate['candidateId']?>" required>
+                    </td>                    
+                </tr>
+                <?php              
+            }
+
+            ?>
+            <input type="submit" value="Delete!" id="submitBtn">
+            </form>
+            <?php
+            
+        } else {
+            echo "0 results";
+        }
+
+        $conn->close();    
+    }
+
+    function deleteCandidate(&$conn, $candID)
+    {
+        $sql = 'DELETE FROM candidate WHERE candidateId = ' . $candID;
+
+        if ($conn->query($sql) === TRUE) {
+            echo "Candidate deleted successfully";
+            header("Location: ../views/pollingofficer.php");
+            $conn->close();
+            exit;
+        } else {
+            echo "Error deleting record: " . $conn->error;
+        }
+
+    }
+
+    function deleteUser(&$conn, $userId)
+    {
+        $sql = 'DELETE FROM user WHERE userId = ' . $userId;
+
+        if ($conn->query($sql) === TRUE) {
+            echo "User deleted successfully";
+            header("Location: ../views/pollingofficer.php");
+            $conn->close();
+            exit;
+        } else {
+            echo "Error deleting record: " . $conn->error;
+        } 
+    }
+
+    function deleteUserBtnForm(&$conn)
+    {
+        $tableName = 'user';
+
+        $sql = "SELECT * FROM " . $tableName;
+
+        $result = $conn->query($sql);
+
+        ?>
+        <form action="../models/pOfficer-DeleteUser.php" method="post">
+            <table id="userTable" class="table table-bordered table-striped table-hover">
+                <!-- table head -->
+                <thead>
+                    <!-- table row -->
+                    <tr>
+                        <!-- table column headings -->
+                        <th id="userName">User Full Name</th>
+                        <th id="userEmail">User Email</th>
+                        <th id="userId">Delete</th>
+                    </tr>
+                </thead>
+        
+        <?php
+
+        if ($result->num_rows > 0) {
+            // for each to show each applicant
+            foreach ($result as $user)
+            {
+                // closing php and echoing inside html table data
+                ?>
+                <tr>
+                    <td><?= $user['fName'] ." ". $user['lName']?></td>
+                    <td><?= $user['email']?></td>
+                    <td>
+                        <input type="radio" id="userChoice"  name="userChoice"
+                          value="<?= $user['userID']?>" required>
+                    </td>                    
+                </tr>
+                <?php              
+            }
+
+            ?>
+            <input type="submit" value="Delete!" id="submitBtn">
+            </form>
+            <?php
+            
+        } else {
+            echo "0 results";
+        }
+
+        $conn->close();    
+    }
 ?>

@@ -55,6 +55,7 @@ if (mysqli_stmt_execute($stmt)) {
     // once entered successful, will redirect to login page
     header("Location: ../views/pollingofficer.php");
     // exiting the script
+    $conn->close();
     exit;
 
 } else {
@@ -66,5 +67,7 @@ if (mysqli_stmt_execute($stmt)) {
     }
     
 }
+
+
 
 ?>
