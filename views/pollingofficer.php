@@ -132,7 +132,7 @@
 
                 // functionality for updateUserBtn
                 if (isset($_POST['updateUserBtn'])) {
-
+                    updateCandidateBtn();
                 }
 
                 // functionality for deleteUserBtn

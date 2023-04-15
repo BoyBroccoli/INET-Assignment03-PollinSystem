@@ -325,28 +325,57 @@
 
     function updateCandidateBtn(&$conn)
     {
-        ?>
-            <div class="table-responsive">
-                <table id="tAppUpdateDbTable" class="table table-bordered table-striped table-hover">
+        
+            $tableName = 'candidate';
+
+            $sql = "SELECT * FROM " . $tableName;
+
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+
+                ?>
+
+                <table class="table table-bordered table-striped table-hover">
                     <!-- table head -->
                     <thead>
                         <!-- table row -->
                         <tr>
                             <!-- table column headings -->
-                            <th id="appIdHeading">Candidate ID</th>
-                            <th id="appQHeading">Candidate Full Name</th>
-                            <th id="appOrigAnsHeading">Candidate Slogan</th>
-                                
+                            <th id="candidateFirstName">Candidate First Name</th>
+                            <th id="candidateLastName">Candidate Last Name</th>
+                            <th id="candidateSlogan">Candidate Slogan</th>         
+                            <               
                         </tr>
                     </thead>
+
+                <?php
+                // for each to show each applicant
+
+                foreach ($result as $candidate)
+                {
+
+                    ?>
+                    
                     <!-- table body -->
                     <tbody>
-                        
+                        <td><?= $candidate['fName']?></td>
+                        <td><?= $candidate['lName']?></td>
+                        <td><?= $candidate['slogan']?></td>
                     </tbody>
 
+                <?php
+                }
+
+                ?>
                 </table>
-            </div>
-        <?php
+                <?php
+            } else {
+                echo "0 results";
+            }
+
+            $conn->close();
+        
     }
 
     function deleteCandidateBtnForm(&$conn)
