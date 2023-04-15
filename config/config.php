@@ -323,7 +323,7 @@
     
 
 
-    function updateCandidateBtn(&$conn)
+    function updateCandidateBtnForm(&$conn)
     {
         
             $tableName = 'candidate';
@@ -342,13 +342,14 @@
                         <!-- table row -->
                         <tr>
                             <!-- table column headings -->
+                            <th id="candidateId">Id</th>
                             <th id="candidateFirstName">Candidate First Name</th>
                             <th id="candidateLastName">Candidate Last Name</th>
-                            <th id="candidateSlogan">Candidate Slogan</th>         
-                            <               
+                            <th id="candidateSlogan">Candidate Slogan</th>
+                            <th id="actionBtn">Action</th>
                         </tr>
                     </thead>
-
+                    <form action="../models/pOfficer-UpdateCandidate.php" method="post">
                 <?php
                 // for each to show each applicant
 
@@ -359,9 +360,22 @@
                     
                     <!-- table body -->
                     <tbody>
-                        <td><?= $candidate['fName']?></td>
-                        <td><?= $candidate['lName']?></td>
-                        <td><?= $candidate['slogan']?></td>
+                        <td>
+                            <input type="text" id="candidateId" name="candidateId" value="<?= $candidate['candidateId']?>" readonly>
+                        </td>
+                        <td>
+                            <input type="text" id="fName" name="fName" value="<?= $candidate['fName']?>">
+                        </td>
+                        <td>
+                            <input type="text" id="lName" name="lName" value="<?= $candidate['lName']?>">
+                        </td>
+                        <td>
+                            <input type="text" id="slogan" name="slogan" value="<?= $candidate['slogan']?>">
+                        </td>
+                        <td>
+                        <input type="submit" id="candidateChoice"  name="candidateChoice"
+                          value="Edit" required />
+                        </td> 
                     </tbody>
 
                 <?php
@@ -369,6 +383,7 @@
 
                 ?>
                 </table>
+                </form>
                 <?php
             } else {
                 echo "0 results";
@@ -377,6 +392,118 @@
             $conn->close();
         
     }
+
+    function updateCandidate(&$conn, $candidateId, $firstName, $lastName, $slogan)
+    {
+        $sql = "UPDATE candidate
+                SET fName='" . $firstName . "' , lName='" . $lastName . "', slogan='" . $slogan
+                . "' WHERE candidateId=" . $candidateId;
+
+        if ($conn->query($sql)) {
+            echo "Candidate updated successfully";
+            header("Location: ../views/pollingofficer.php");
+            $conn->close();
+            exit;
+        } else {
+            echo "Error updating record: " . $conn->error;
+        }
+
+    }
+
+
+    function updateUserBtnForm(&$conn)
+    {
+        
+            $tableName = 'user';
+
+            $sql = "SELECT * FROM " . $tableName . " WHERE isAdmin = 0";
+
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+
+                ?>
+
+                <table class="table table-bordered table-striped table-hover">
+                    <!-- table head -->
+                    <thead>
+                        <!-- table row -->
+                        <tr>
+                            <!-- table column headings -->
+                            <th id="userId">Id</th>
+                            <th id="userFirstName">User First Name</th>
+                            <th id="userLastName">User Last Name</th>
+                            <th id="userSlogan">User UserName</th>
+                            <th id="userEmail">User Email</th>
+                            <th id="actionBtn">Action</th>
+                        </tr>
+                    </thead>
+                    <form action="../models/pOfficer-UpdateUser.php" method="post">
+                <?php
+                // for each to show each applicant
+
+                foreach ($result as $user)
+                {
+
+                    ?>
+                    
+                    <!-- table body -->
+                    <tbody>
+                        <td>
+                            <input type="text" id="userId" name="userId" value="<?= $user['userID']?>" readonly>
+                        </td>
+                        <td>
+                            <input type="text" id="fName" name="fName" value="<?= $user['fName']?>">
+                        </td>
+                        <td>
+                            <input type="text" id="lName" name="lName" value="<?= $user['lName']?>">
+                        </td>
+                        <td>
+                            <input type="text" id="userName" name="userName" value="<?= $user['userName']?>">
+                        </td>
+                        <td>
+                            <input type="text" id="email" name="email" value="<?= $user['email']?>">
+                        </td>
+                        <td>
+                        <input type="submit" id="userChoice"  name="userChoice"
+                          value="Edit" required />
+                        </td> 
+                    </tbody>
+
+                <?php
+                }
+
+                ?>
+                </table>
+                </form>
+                <?php
+            } else {
+                echo "0 results";
+            }
+
+            $conn->close();
+        
+    }
+
+    function updateUser(&$conn, $userId, $firstName, $lastName, $email, $userName)
+    {
+        $sql = "UPDATE user
+                SET fName='" . $firstName . "', lName='" . $lastName . "', email='" . $email
+                . "', userName='" . $userName
+                . "' WHERE userID=" . $userId;
+
+        if ($conn->query($sql)) {
+            echo "User updated successfully";
+            header("Location: ../views/pollingofficer.php");
+            $conn->close();
+            exit;
+        } else {
+            echo "Error updating record: " . $conn->error;
+        }
+
+    }
+
+    
 
     function deleteCandidateBtnForm(&$conn)
     {

@@ -6,19 +6,7 @@ validation
     .addField("#userName", [ // rule for userName
         {
             rule: "required"
-        }//,
-        // {
-        //     // custom validator
-        //     validator: (value) => async () => {
-        //         // makeing a request to the php username-validte script
-        //         let Response = await fetch("../../../models/validate-userName.php"
-        //             + encodeURIComponent(value)) // returns a promise obj
-        //             ;
-        //         let json = await Response.json();
-        //         return json.available;
-           // },
-            //errorMessage: "User Name Already Taken"
-        //}
+        }
     ])
     .addField("#email", [ // rule for email
         {

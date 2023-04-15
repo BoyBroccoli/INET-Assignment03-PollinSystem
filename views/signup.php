@@ -1,11 +1,13 @@
+<script src="../src/inc/js/validation.js" defer></script>
+
+
 <?php
     $title = "Signup Form | Signup Today";
     include_once("../src/inc/headerTemplate.php");
-    include_once("../src/libs/helpers.php");
 
 ?>
 
-    <form action = "../models/signup-process.php" method="post" id="signupform" novalidate>
+    <form action = "../models/signup-process.php" method="post" id="signupform">
         
         <div class="container">
             <h1 class="text-center">Sign Up Form</h1>
@@ -14,13 +16,13 @@
                     <!-- User Name Entry for Form -->
                     <label for="userName" class="form-label">Username:</label>
                     <input type="text" class="form-control" name="userName" id="userName"
-                    placeholder="Input desired username" autocomplete="off">
+                    placeholder="Input desired username" autocomplete="off" required>
                 </div>
                     <!-- Email Entry for Form -->
                 <div class="col">
                 <label for="email" class="form-label">Email:</label>
                 <input type="email" class="form-control" name="email" id="email"
-                placeholder="email@example.com" autocomplete="off">
+                placeholder="email@example.com" autocomplete="off" required>
                 </div>
             </div>
                     <!-- First Name Entry for Form -->
@@ -28,13 +30,13 @@
                 <div class="col-6">
                     <label for="fName" class="form-label">First Name:</label>
                     <input type="text" class="form-control" name="fName" id="fName"
-                    placeholder="Enter First Name" autocomplete="off">
+                    placeholder="Enter First Name" autocomplete="off" required>
                 </div>
                 <!-- Last Name Entry for Form -->
                 <div class="col">
                     <label for="lName" class="form-label">Last Name:</label>
                     <input type="text" class="form-control" name="lName" id="lName"
-                    placeholder="Enter Last Name" autocomplete="off">
+                    placeholder="Enter Last Name" autocomplete="off" required>
                 </div>
             </div>
             <!-- Password Entry for Form -->
@@ -42,13 +44,13 @@
                 <div class="col-6">
                     <label for="password" class="form-label">Password:</label>
                     <input type="password" class="form-control" name="password" id="password"
-                    placeholder="Enter password" autocomplete="off">
+                    placeholder="Enter password" autocomplete="off" required>
                 </div>
                 <!-- Password Confirmation for Form -->
                 <div class="col">
                     <label for="password2" class="form-label">Password Again:</label>
                     <input type="password" class="form-control" name="password2" id="password2"
-                    placeholder="Enter exact password again" autocomplete="off">
+                    placeholder="Enter exact password again" autocomplete="off" required>
                 </div>
             </div>
             <!-- Terms Agreement Button -->

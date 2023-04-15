@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../src/inc/css/style.css">
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="../inc/js/validation.js" defer></script>
+    <script src="../../inc/js/validation.js" defer></script>
     <title><?php echo $title?></title>
 </head>
 <body>

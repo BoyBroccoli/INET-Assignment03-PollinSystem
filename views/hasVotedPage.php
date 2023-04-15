@@ -2,8 +2,6 @@
 
     $title = "Already Voted Page";
     include_once("../config/config.php");
-    include_once("../src/inc/headerTemplate.php");
-
 ?>
 
 <?php
